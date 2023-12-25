@@ -1,35 +1,67 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import Menu from "./components/Menu";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [initialRender, setInitialRender] = useState(false);
 
+  const [allPokemonList, setAllPokemonList] = useState([]);
+  const [numOfCards, setNumOfCards] = useState(10);
+  const [renderMenu, setRenderMenu] = useState(true);
+  let chosenPokemonList = [];
+
+  function fetchAllPokemon() {
+    if (!initialRender) {
+      fetch("https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0")
+        .then((response) => response.json())
+        .then((json) => {
+          setAllPokemonList(json.results);
+        });
+      setInitialRender(true);
+    }
+  }
+
+  function fetchSpriteURL() {
+    for (let i = 0; i < chosenPokemonList.length; i++) {
+      let spriteURL = "";
+      fetch(chosenPokemonList[i].url)
+        .then((response) => response.json())
+        .then((json) => {
+          spriteURL = json.sprites.front_default;
+          chosenPokemonList[i].spriteURL = spriteURL;
+        });
+    }
+  }
+
+  function changeNumOfCards(value) {
+    setNumOfCards(value);
+  }
+
+  function closeMenu() {
+    setRenderMenu(false);
+  }
+
+  function randomizeList(list, numberOfElements) {
+    const shuffledList = list.slice().sort(() => Math.random() - 0.5);
+
+    return shuffledList.slice(0, numberOfElements);
+  }
+
+  fetchAllPokemon();
+  chosenPokemonList = randomizeList(allPokemonList, numOfCards);
+  fetchSpriteURL();
+
+  console.log(chosenPokemonList);
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div>
+      {renderMenu && (
+        <Menu changeNumOfCards={changeNumOfCards} closeMenu={closeMenu} />
+      )}
+      {chosenPokemonList.map((item) => (
+        <p>{item.name}</p>
+      ))}
+    </div>
+  );
 }
 
-export default App
+export default App;
