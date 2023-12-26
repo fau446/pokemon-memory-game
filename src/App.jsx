@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Menu from "./components/Menu";
 import Game from "./components/Game";
 import "./App.css";
+import { v4 as uuidv4 } from "uuid";
 
 function App() {
   const [pokemonList, setPokemonList] = useState([]);
@@ -14,6 +15,7 @@ function App() {
         .then((response) => response.json())
         .then((json) => {
           pokemon.spriteURL = json.sprites.front_default;
+          pokemon.key = uuidv4();
           return pokemon;
         });
     });
