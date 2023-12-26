@@ -1,36 +1,25 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Menu from "./components/Menu";
 import "./App.css";
 
 function App() {
-  const [initialRender, setInitialRender] = useState(false);
-
-  const [allPokemonList, setAllPokemonList] = useState([]);
+  const [pokemonList, setPokemonList] = useState([]);
   const [numOfCards, setNumOfCards] = useState(10);
   const [renderMenu, setRenderMenu] = useState(true);
-  let chosenPokemonList = [];
 
-  function fetchAllPokemon() {
-    if (!initialRender) {
-      fetch("https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0")
+  function fetchSpriteURL(list) {
+    const fetchPromises = list.map((pokemon) => {
+      return fetch(pokemon.url)
         .then((response) => response.json())
         .then((json) => {
-          setAllPokemonList(json.results);
+          pokemon.spriteURL = json.sprites.front_default;
+          return pokemon;
         });
-      setInitialRender(true);
-    }
-  }
+    });
 
-  function fetchSpriteURL() {
-    for (let i = 0; i < chosenPokemonList.length; i++) {
-      let spriteURL = "";
-      fetch(chosenPokemonList[i].url)
-        .then((response) => response.json())
-        .then((json) => {
-          spriteURL = json.sprites.front_default;
-          chosenPokemonList[i].spriteURL = spriteURL;
-        });
-    }
+    Promise.all(fetchPromises).then((updatedList) => {
+      setPokemonList(updatedList);
+    });
   }
 
   function changeNumOfCards(value) {
@@ -47,19 +36,22 @@ function App() {
     return shuffledList.slice(0, numberOfElements);
   }
 
-  fetchAllPokemon();
-  chosenPokemonList = randomizeList(allPokemonList, numOfCards);
-  fetchSpriteURL();
+  useEffect(() => {
+    console.log("Fetching");
+    let tempList = [];
+    fetch("https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0")
+      .then((response) => response.json())
+      .then((json) => {
+        tempList = randomizeList(json.results, numOfCards);
+        fetchSpriteURL(tempList);
+      });
+  }, [numOfCards]);
 
-  console.log(chosenPokemonList);
   return (
     <div>
       {renderMenu && (
         <Menu changeNumOfCards={changeNumOfCards} closeMenu={closeMenu} />
       )}
-      {chosenPokemonList.map((item) => (
-        <p>{item.name}</p>
-      ))}
     </div>
   );
 }
