@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Menu from "./components/Menu";
+import Game from "./components/Game";
 import "./App.css";
 
 function App() {
@@ -52,6 +53,7 @@ function App() {
       {renderMenu && (
         <Menu changeNumOfCards={changeNumOfCards} closeMenu={closeMenu} />
       )}
+      <Game pokemonList={pokemonList} />
     </div>
   );
 }
