@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Card from "./Card";
 
-function Game({ pokemonList }) {
+function Game({ pokemonList, randomizeList, changePokemonList }) {
   const [currentScore, setCurrentScore] = useState(0);
   const [selectedCards, setSelectedCards] = useState([]);
 
@@ -15,6 +15,9 @@ function Game({ pokemonList }) {
 
     let tempList = [...selectedCards, e.target.dataset.uniqueid];
     setSelectedCards(tempList);
+
+    pokemonList = randomizeList(pokemonList, pokemonList.length);
+    changePokemonList(pokemonList);
     setCurrentScore(currentScore + 1);
   }
 

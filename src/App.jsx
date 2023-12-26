@@ -29,6 +29,10 @@ function App() {
     setNumOfCards(value);
   }
 
+  function changePokemonList(list) {
+    setPokemonList(list);
+  }
+
   function closeMenu() {
     setRenderMenu(false);
   }
@@ -55,7 +59,11 @@ function App() {
       {renderMenu && (
         <Menu changeNumOfCards={changeNumOfCards} closeMenu={closeMenu} />
       )}
-      <Game pokemonList={pokemonList} />
+      <Game
+        pokemonList={pokemonList}
+        randomizeList={randomizeList}
+        changePokemonList={changePokemonList}
+      />
     </div>
   );
 }
