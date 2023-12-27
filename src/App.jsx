@@ -59,11 +59,13 @@ function App() {
       {renderMenu && (
         <Menu changeNumOfCards={changeNumOfCards} closeMenu={closeMenu} />
       )}
-      <Game
-        pokemonList={pokemonList}
-        randomizeList={randomizeList}
-        changePokemonList={changePokemonList}
-      />
+      {!renderMenu && (
+        <Game
+          pokemonList={pokemonList}
+          randomizeList={randomizeList}
+          changePokemonList={changePokemonList}
+        />
+      )}
     </div>
   );
 }
