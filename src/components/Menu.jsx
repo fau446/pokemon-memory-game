@@ -1,10 +1,11 @@
-function Menu({ changeNumOfCards, closeMenu }) {
+function Menu({ changeNumOfCards, closeMenu, bestScore }) {
   function handleNumOfCardsChange(e) {
     changeNumOfCards(e.target.value);
   }
 
   return (
     <div>
+      <p>Best Score: {bestScore}</p>
       <label htmlFor="numOfCards">Choose the number of cards: </label>
       <select
         id="numOfCards"
