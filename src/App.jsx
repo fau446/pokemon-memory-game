@@ -44,6 +44,10 @@ function App() {
     setRenderMenu(false);
   }
 
+  function openMenu() {
+    setRenderMenu(true);
+  }
+
   function randomizeList(list, numberOfElements) {
     const shuffledList = list.slice().sort(() => Math.random() - 0.5);
 
@@ -76,6 +80,7 @@ function App() {
           randomizeList={randomizeList}
           changePokemonList={changePokemonList}
           updateBestScore={updateBestScore}
+          openMenu={openMenu}
         />
       )}
     </div>
