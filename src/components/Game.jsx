@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Card from "./Card";
 import Results from "./Results";
+import styles from "../styles/Game.module.css";
 
 function Game({
   pokemonList,
@@ -60,7 +61,7 @@ function Game({
   }
 
   return (
-    <div>
+    <div className={styles.cards}>
       {pokemonList.map((item) => (
         <Card
           key={item.key}

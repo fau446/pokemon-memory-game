@@ -1,3 +1,5 @@
+import styles from "../styles/Menu.module.css";
+
 function Results({ gameResult, currentScore, resetGame, openMenu }) {
   function handleClick() {
     resetGame();
@@ -5,11 +7,13 @@ function Results({ gameResult, currentScore, resetGame, openMenu }) {
   }
 
   return (
-    <div>
-      <p>
+    <div className={styles.box}>
+      <p className={styles.label}>
         You {gameResult}! Your score was: {currentScore}
       </p>
-      <button onClick={handleClick}>Menu</button>
+      <button className={styles.button} onClick={handleClick}>
+        Menu
+      </button>
     </div>
   );
 }

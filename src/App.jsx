@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import Menu from "./components/Menu";
 import Game from "./components/Game";
-import "./App.css";
 import { v4 as uuidv4 } from "uuid";
+import styles from "./styles/App.module.css";
 
 function App() {
   const [pokemonList, setPokemonList] = useState([]);
@@ -72,7 +72,7 @@ function App() {
   }, [numOfCards]);
 
   return (
-    <div>
+    <div className={styles.app}>
       <Header currentScore={currentScore} bestScore={bestScore} />
       {renderMenu && (
         <Menu
