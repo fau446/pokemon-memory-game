@@ -16,8 +16,9 @@ function Menu({ changeNumOfCards, closeMenu }) {
           id="numOfCards"
           name="numOfCards"
           onChange={handleNumOfCardsChange}
+          value={"0"}
         >
-          <option value="0" selected disabled hidden>
+          <option value="0" disabled hidden>
             -
           </option>
           <option value="5">5</option>
