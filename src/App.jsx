@@ -9,6 +9,7 @@ function App() {
   const [numOfCards, setNumOfCards] = useState(0);
   const [renderMenu, setRenderMenu] = useState(true);
   const [bestScore, setBestScore] = useState(0);
+  const [currentScore, setCurrentScore] = useState(0);
 
   function fetchSpriteURL(list) {
     const fetchPromises = list.map((pokemon) => {
@@ -38,6 +39,10 @@ function App() {
     if (value > bestScore) {
       setBestScore(value);
     }
+  }
+
+  function updateCurrentScore(value) {
+    setCurrentScore(value);
   }
 
   function closeMenu() {
@@ -80,6 +85,8 @@ function App() {
           randomizeList={randomizeList}
           changePokemonList={changePokemonList}
           updateBestScore={updateBestScore}
+          currentScore={currentScore}
+          updateCurrentScore={updateCurrentScore}
           openMenu={openMenu}
           changeNumOfCards={changeNumOfCards}
         />

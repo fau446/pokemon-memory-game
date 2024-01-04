@@ -7,10 +7,11 @@ function Game({
   randomizeList,
   changePokemonList,
   updateBestScore,
+  currentScore,
+  updateCurrentScore,
   openMenu,
   changeNumOfCards,
 }) {
-  const [currentScore, setCurrentScore] = useState(0);
   const [selectedCards, setSelectedCards] = useState([]);
   const [gameResult, setGameResult] = useState("");
 
@@ -27,7 +28,7 @@ function Game({
     // check if the user has won
     if (currentScore + 1 === pokemonList.length) {
       updateBestScore(currentScore + 1);
-      setCurrentScore(currentScore + 1);
+      updateCurrentScore(currentScore + 1);
       setGameResult("Win");
       return;
     }
@@ -37,11 +38,11 @@ function Game({
 
     pokemonList = randomizeList(pokemonList, pokemonList.length);
     changePokemonList(pokemonList);
-    setCurrentScore(currentScore + 1);
+    updateCurrentScore(currentScore + 1);
   }
 
   function resetGame() {
-    setCurrentScore(0);
+    updateCurrentScore(0);
     setSelectedCards([]);
     setGameResult("");
     changeNumOfCards(0);
