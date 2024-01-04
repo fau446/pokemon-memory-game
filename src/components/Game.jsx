@@ -10,8 +10,7 @@ function Game({
   updateBestScore,
   currentScore,
   updateCurrentScore,
-  openMenu,
-  changeNumOfCards,
+  resetGame,
 }) {
   const [selectedCards, setSelectedCards] = useState([]);
   const [gameResult, setGameResult] = useState("");
@@ -42,20 +41,12 @@ function Game({
     updateCurrentScore(currentScore + 1);
   }
 
-  function resetGame() {
-    updateCurrentScore(0);
-    setSelectedCards([]);
-    setGameResult("");
-    changeNumOfCards(0);
-  }
-
   if (gameResult != "") {
     return (
       <Results
         gameResult={gameResult}
         currentScore={currentScore}
         resetGame={resetGame}
-        openMenu={openMenu}
       />
     );
   }

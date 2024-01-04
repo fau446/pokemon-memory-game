@@ -55,6 +55,12 @@ function App() {
     setRenderMenu(true);
   }
 
+  function resetGame() {
+    updateCurrentScore(0);
+    changeNumOfCards(0);
+    openMenu();
+  }
+
   function randomizeList(list, numberOfElements) {
     const shuffledList = list.slice().sort(() => Math.random() - 0.5);
 
@@ -73,7 +79,11 @@ function App() {
 
   return (
     <div className={styles.app}>
-      <Header currentScore={currentScore} bestScore={bestScore} />
+      <Header
+        currentScore={currentScore}
+        bestScore={bestScore}
+        resetGame={resetGame}
+      />
       {renderMenu && (
         <Menu
           changeNumOfCards={changeNumOfCards}
@@ -89,8 +99,7 @@ function App() {
           updateBestScore={updateBestScore}
           currentScore={currentScore}
           updateCurrentScore={updateCurrentScore}
-          openMenu={openMenu}
-          changeNumOfCards={changeNumOfCards}
+          resetGame={resetGame}
         />
       )}
     </div>
