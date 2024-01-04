@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Header from "./components/Header";
 import Menu from "./components/Menu";
 import Game from "./components/Game";
 import "./App.css";
@@ -72,6 +73,7 @@ function App() {
 
   return (
     <div>
+      <Header currentScore={currentScore} bestScore={bestScore} />
       {renderMenu && (
         <Menu
           changeNumOfCards={changeNumOfCards}

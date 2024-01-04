@@ -61,7 +61,6 @@ function Game({
 
   return (
     <div>
-      <p>Current Score: {currentScore}</p>
       {pokemonList.map((item) => (
         <Card
           key={item.key}
