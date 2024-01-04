@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 
 function App() {
   const [pokemonList, setPokemonList] = useState([]);
-  const [numOfCards, setNumOfCards] = useState(10);
+  const [numOfCards, setNumOfCards] = useState(0);
   const [renderMenu, setRenderMenu] = useState(true);
   const [bestScore, setBestScore] = useState(0);
 
@@ -41,6 +41,7 @@ function App() {
   }
 
   function closeMenu() {
+    if (numOfCards === 0) return;
     setRenderMenu(false);
   }
 
@@ -55,7 +56,6 @@ function App() {
   }
 
   useEffect(() => {
-    console.log("Fetching");
     let tempList = [];
     fetch("https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0")
       .then((response) => response.json())
@@ -81,6 +81,7 @@ function App() {
           changePokemonList={changePokemonList}
           updateBestScore={updateBestScore}
           openMenu={openMenu}
+          changeNumOfCards={changeNumOfCards}
         />
       )}
     </div>

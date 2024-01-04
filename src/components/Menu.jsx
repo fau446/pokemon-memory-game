@@ -12,10 +12,11 @@ function Menu({ changeNumOfCards, closeMenu, bestScore }) {
         name="numOfCards"
         onChange={handleNumOfCardsChange}
       >
-        <option value="5">5</option>
-        <option value="10" selected>
-          10
+        <option value="0" selected disabled hidden>
+          -
         </option>
+        <option value="5">5</option>
+        <option value="10">10</option>
         <option value="15">15</option>
       </select>
       <button onClick={closeMenu}>Close Menu</button>

@@ -8,6 +8,7 @@ function Game({
   changePokemonList,
   updateBestScore,
   openMenu,
+  changeNumOfCards,
 }) {
   const [currentScore, setCurrentScore] = useState(0);
   const [selectedCards, setSelectedCards] = useState([]);
@@ -43,6 +44,7 @@ function Game({
     setCurrentScore(0);
     setSelectedCards([]);
     setGameResult("");
+    changeNumOfCards(0);
   }
 
   if (gameResult != "") {
