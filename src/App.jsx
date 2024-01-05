@@ -86,6 +86,7 @@ function App() {
       />
       {renderMenu && (
         <Menu
+          numOfCards={numOfCards}
           changeNumOfCards={changeNumOfCards}
           closeMenu={closeMenu}
           bestScore={bestScore}

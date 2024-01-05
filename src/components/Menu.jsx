@@ -1,6 +1,6 @@
 import styles from "../styles/Menu.module.css";
 
-function Menu({ changeNumOfCards, closeMenu }) {
+function Menu({ numOfCards, changeNumOfCards, closeMenu }) {
   function handleNumOfCardsChange(e) {
     changeNumOfCards(e.target.value);
   }
@@ -16,7 +16,7 @@ function Menu({ changeNumOfCards, closeMenu }) {
           id="numOfCards"
           name="numOfCards"
           onChange={handleNumOfCardsChange}
-          value={"0"}
+          value={numOfCards}
         >
           <option value="0" disabled hidden>
             -
